@@ -259,7 +259,7 @@ export default function SettingsPage() {
       <div className="flex justify-end pt-4">
         <button
           onClick={saveSettings}
-          className="flex items-center justify-center bg-furia-purple hover:bg-furia-purple/90 text-white px-6 py-2 rounded-lg transition-colors"
+          className="flex items-center justify-center bg-furia-gold hover:bg-furia-gold/90 text-black px-6 py-2 rounded-lg transition-colors"
         >
           <Save className="h-5 w-5 mr-2" />
           Salvar configurações

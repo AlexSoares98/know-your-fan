@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Calendar, Clock, Trophy, Users, ExternalLink } from "lucide-react";
 import { FanLevelBadge } from "@/components/FanLevelBadge";
+import Link from "next/link";
 
 type MatchInfo = {
   id: string;
@@ -53,6 +54,9 @@ export default function DashboardOverviewPage() {
       opponentLogo: "/logo-liquid.png",
     },
   ]);
+
+  const [isProfileComplete, setIsProfileComplete] = useState(false);
+  const [showBadgeAnimation, setShowBadgeAnimation] = useState(false);
 
   useEffect(() => {
     const storedPreferences = localStorage.getItem("furia-fan-preferences");
@@ -110,6 +114,21 @@ export default function DashboardOverviewPage() {
         connectedSocials: connectedCount
       }));
     }
+
+    // Verifica se o cadastro completo foi finalizado
+    const profileComplete = localStorage.getItem("furia-profile-complete") === "true";
+    setIsProfileComplete(profileComplete);
+    
+    // Verifica se acabou de completar o perfil para mostrar animação
+    const justCompleted = localStorage.getItem("furia-just-completed-profile") === "true";
+    if (justCompleted) {
+      // Define o tempo para iniciar a animação
+      setTimeout(() => {
+        setShowBadgeAnimation(true);
+        // Remove o flag depois de mostrar a animação
+        localStorage.removeItem("furia-just-completed-profile");
+      }, 1000);
+    }
   }, []);
 
   return (
@@ -152,6 +171,7 @@ export default function DashboardOverviewPage() {
               purchases={userData.purchases}
               connectedSocials={userData.connectedSocials}
               className="mt-4"
+              showAnimation={showBadgeAnimation}
             />
             
             <div className="mt-6 w-full pt-4 border-t border-gray-700">
@@ -200,6 +220,35 @@ export default function DashboardOverviewPage() {
                 <span className="text-sm text-gray-400">Redes sociais conectadas:</span>
                 <span className="text-sm font-medium text-white">{userData.connectedSocials}</span>
               </div>
+            </div>
+            
+            <div className="mt-6 w-full">
+              {!isProfileComplete ? (
+                <>
+                  <Link href="/auth/register">
+                    <motion.button
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full px-4 py-3 rounded-lg bg-furia-dark hover:bg-furia-dark/80 text-white font-medium transition-colors relative overflow-hidden group"
+                    >
+                      <span className="relative z-10">Finalizar Cadastro</span>
+                      <span className="absolute inset-0 rounded-lg border-[0px] border-transparent bg-gradient-to-r from-furia-gold to-furia-purple bg-[length:100%_100%] animate-gradient-x"></span>
+                      <span className="absolute inset-[1px] rounded-[10px] bg-furia-dark z-0"></span>
+                    </motion.button>
+                  </Link>
+                  <p className="text-xs text-center mt-2 text-gray-400">
+                    Faça seu cadastro completo e ganhe +10 pontos para evoluir seu Badge!
+                  </p>
+                </>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="w-full px-4 py-3 rounded-lg bg-furia-gold text-black font-medium text-center"
+                >
+                  Cadastro Completo
+                </motion.div>
+              )}
             </div>
           </div>
         </motion.div>
@@ -286,7 +335,7 @@ export default function DashboardOverviewPage() {
                 href="https://www.hltv.org/team/8297/furia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 text-white bg-furia-purple hover:bg-furia-purple/90 rounded-lg text-sm font-medium transition-colors flex items-center"
+                className="px-4 py-2 text-black bg-furia-gold hover:bg-furia-gold/90 rounded-lg text-sm font-medium transition-colors flex items-center"
               >
                 Ver calendário completo
                 <ExternalLink className="h-4 w-4 ml-2" />

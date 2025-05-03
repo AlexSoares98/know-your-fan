@@ -213,7 +213,7 @@ export default function Quiz() {
               
               <button 
                 onClick={startQuiz}
-                className="bg-furia-purple hover:bg-furia-purple/90 text-white px-6 py-3 rounded-lg font-medium transition-colors mb-6"
+                className="bg-furia-gold hover:bg-furia-gold/90 text-black px-6 py-3 rounded-lg font-medium transition-colors mb-6"
               >
                 Iniciar Quiz
               </button>
@@ -276,13 +276,19 @@ export default function Quiz() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => handleOptionSelect(index)}
-                      className={`p-3 rounded-md cursor-pointer transition-colors ${
+                      className={`p-3 rounded-md cursor-pointer transition-colors relative ${
                         selectedOption === index 
-                          ? 'bg-furia-gold text-black' 
+                          ? 'bg-furia-dark border-2 border-transparent' 
                           : 'bg-zinc-800 text-white hover:bg-zinc-700'
                       }`}
                     >
-                      {option}
+                      {selectedOption === index && (
+                        <>
+                          <div className="absolute inset-0 rounded-md bg-gradient-to-r from-furia-gold to-furia-purple"></div>
+                          <div className="absolute inset-[2px] rounded-[3px] bg-furia-dark z-0"></div>
+                        </>
+                      )}
+                      <span className={`relative ${selectedOption === index ? 'z-10' : ''}`}>{option}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -291,7 +297,7 @@ export default function Quiz() {
               <button 
                 onClick={goToNextQuestion}
                 disabled={selectedOption === null}
-                className={`bg-furia-purple hover:bg-furia-purple/90 text-white py-3 px-4 rounded-lg font-medium transition-colors w-full ${selectedOption === null ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`bg-furia-gold hover:bg-furia-gold/90 text-black py-3 px-4 rounded-lg font-medium transition-colors w-full ${selectedOption === null ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 {currentQuestionIndex < quizQuestions.length - 1 ? 'Próxima Pergunta' : 'Finalizar Quiz'}
               </button>
@@ -309,7 +315,7 @@ export default function Quiz() {
               <div className="flex justify-center space-x-4">
                 <button 
                   onClick={resetQuiz} 
-                  className="bg-furia-purple hover:bg-furia-purple/90 text-white py-2 px-4 rounded-lg font-medium transition-colors"
+                  className="bg-furia-gold hover:bg-furia-gold/90 text-black py-2 px-4 rounded-lg font-medium transition-colors"
                 >
                   Jogar Novamente
                 </button>

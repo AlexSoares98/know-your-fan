@@ -33,7 +33,7 @@ export default function Home() {
           priority
           quality={100}
         />
-        <div className="absolute inset-0 bg-furia-dark/80 "></div>
+        <div className="absolute inset-0 bg-furia-dark/70 "></div>
       </div>
       
       {/* Conteúdo */}
@@ -68,11 +68,11 @@ export default function Home() {
                   className="inline-flex items-center px-8 py-3 rounded-lg bg-furia-dark hover:bg-furia-dark/80 text-white font-medium transition-colors relative overflow-hidden group"
                 >
                   <span className="relative z-10">Conectar com a FURIA</span>
-                  <svg className="ml-2 w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="ml-2 w-5 h-5 relative z-10 transform transition-transform duration-300 group-hover:translate-x-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
-                  <span className="absolute inset-0 rounded-lg border-2 border-transparent bg-gradient-to-r from-furia-gold via-furia-purple to-furia-gold bg-[length:400%_100%] animate-gradient-x"></span>
-                  <span className="absolute inset-[2px] rounded-[6px] bg-furia-dark z-0"></span>
+                  <span className="absolute inset-0 rounded-lg border-[0px] border-transparent bg-gradient-to-r from-furia-gold to-furia-purple bg-[length:100%_100%] animate-gradient-x"></span>
+                  <span className="absolute inset-[1px] rounded-[10px] bg-furia-dark z-0"></span>
                   <div className="absolute inset-0 -top-10 bg-gradient-to-t from-furia-gold/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:top-0 transition-all duration-300 z-0"></div>
                 </Link>
               </motion.div>
@@ -84,7 +84,7 @@ export default function Home() {
             initial={{ x: 20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.3 }}
-          >
+        >
           </motion.div>
         </motion.section>
 
@@ -96,7 +96,7 @@ export default function Home() {
               Visitar loja oficial
             </Link>
           </p>
-        </footer>
+      </footer>
       </div>
     </div>
   );

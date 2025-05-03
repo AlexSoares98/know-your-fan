@@ -14,6 +14,7 @@ import {
   ChevronRight,
   ExternalLink
 } from "lucide-react";
+import Link from "next/link";
 
 type RecommendationType = "match" | "product" | "content" | "quiz";
 
@@ -202,15 +203,15 @@ export default function RecommendationsPage() {
                   )}
                   
                   <div className="flex flex-wrap gap-3 mt-6">
-                    <a
+                    <Link 
                       href={recommendation.primaryAction.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 bg-furia-purple hover:bg-furia-purple/90 text-white py-3 px-4 rounded-lg font-medium text-center transition-colors flex items-center justify-center"
+                      className="flex-1 bg-furia-gold hover:bg-furia-gold/90 text-black py-3 px-4 rounded-lg font-medium text-center transition-colors flex items-center justify-center"
                     >
                       {recommendation.primaryAction.label}
                       <ExternalLink className="ml-2 h-4 w-4" />
-                    </a>
+                    </Link>
                     
                     {recommendation.secondaryAction && (
                       <a
@@ -252,9 +253,9 @@ export default function RecommendationsPage() {
         {/* Navegação */}
         <div className="absolute inset-y-0 left-0 flex items-center -ml-6">
           <button
+            className="bg-furia-gold hover:bg-furia-gold/80 text-black rounded-full p-3 focus:outline-none transition-colors shadow-lg"
             onClick={prevCard}
-            className="bg-furia-purple hover:bg-furia-purple/80 text-white rounded-full p-3 focus:outline-none transition-colors shadow-lg"
-            aria-label="Recomendação anterior"
+            disabled={activeIndex === 0}
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
@@ -262,9 +263,9 @@ export default function RecommendationsPage() {
         
         <div className="absolute inset-y-0 right-0 flex items-center -mr-6">
           <button
+            className="bg-furia-gold hover:bg-furia-gold/80 text-black rounded-full p-3 focus:outline-none transition-colors shadow-lg"
             onClick={nextCard}
-            className="bg-furia-purple hover:bg-furia-purple/80 text-white rounded-full p-3 focus:outline-none transition-colors shadow-lg"
-            aria-label="Próxima recomendação"
+            disabled={activeIndex === recommendations.length - 1}
           >
             <ChevronRight className="h-6 w-6" />
           </button>

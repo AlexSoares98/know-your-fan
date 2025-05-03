@@ -205,12 +205,14 @@ export default function OnboardingPage() {
                       className={`
                         p-4 rounded-lg cursor-pointer transition-all
                         ${selectedPlayer === player.id
-                          ? "bg-furia-purple border-2 border-furia-gold"
+                          ? "bg-furia-dark border-2 border-transparent bg-gradient-padding relative"
                           : "bg-gray-800 hover:bg-gray-700"}
                       `}
                       onClick={() => setSelectedPlayer(player.id)}
                     >
-                      <div className="flex flex-col items-center justify-center">
+                      <div className={`${selectedPlayer === player.id ? "absolute inset-0 rounded-lg bg-gradient-to-r from-furia-gold to-furia-purple" : ""}`}></div>
+                      <div className={`${selectedPlayer === player.id ? "absolute inset-[2px] rounded-[6px] bg-furia-dark z-0" : ""}`}></div>
+                      <div className={`flex flex-col items-center justify-center relative ${selectedPlayer === player.id ? "z-10" : ""}`}>
                         <div className="w-[70px] h-[120px] relative mb-2">
                           <Image
                             src={player.image}
@@ -233,12 +235,14 @@ export default function OnboardingPage() {
                       className={`
                         p-4 rounded-lg cursor-pointer transition-all
                         ${selectedPlayer === player.id
-                          ? "bg-furia-purple border-2 border-furia-gold"
+                          ? "bg-furia-dark border-2 border-transparent bg-gradient-padding relative"
                           : "bg-gray-800 hover:bg-gray-700"}
                       `}
                       onClick={() => setSelectedPlayer(player.id)}
                     >
-                      <div className="flex flex-col items-center justify-center">
+                      <div className={`${selectedPlayer === player.id ? "absolute inset-0 rounded-lg bg-gradient-to-r from-furia-gold to-furia-purple" : ""}`}></div>
+                      <div className={`${selectedPlayer === player.id ? "absolute inset-[2px] rounded-[6px] bg-furia-dark z-0" : ""}`}></div>
+                      <div className={`flex flex-col items-center justify-center relative ${selectedPlayer === player.id ? "z-10" : ""}`}>
                         <div className="w-[70px] h-[120px] relative mb-2">
                           <Image
                             src={player.image}
@@ -277,12 +281,14 @@ export default function OnboardingPage() {
                       className={`
                         p-4 rounded-lg cursor-pointer transition-all
                         ${selectedContentType === type.id
-                          ? "bg-furia-purple border-2 border-furia-gold"
+                          ? "bg-furia-dark border-2 border-transparent relative"
                           : "bg-gray-800 hover:bg-gray-700"}
                       `}
                       onClick={() => setSelectedContentType(type.id)}
                     >
-                      <h3 className="text-white font-medium">{type.label}</h3>
+                      <div className={`${selectedContentType === type.id ? "absolute inset-0 rounded-lg bg-gradient-to-r from-furia-gold to-furia-purple" : ""}`}></div>
+                      <div className={`${selectedContentType === type.id ? "absolute inset-[2px] rounded-[6px] bg-furia-dark z-0" : ""}`}></div>
+                      <h3 className={`text-white font-medium relative ${selectedContentType === type.id ? "z-10" : ""}`}>{type.label}</h3>
                     </div>
                   ))}
                 </div>
@@ -310,12 +316,14 @@ export default function OnboardingPage() {
                       className={`
                         p-4 rounded-lg cursor-pointer transition-all
                         ${selectedFrequency === freq.id
-                          ? "bg-furia-purple border-2 border-furia-gold"
+                          ? "bg-furia-dark border-2 border-transparent relative"
                           : "bg-gray-800 hover:bg-gray-700"}
                       `}
                       onClick={() => setSelectedFrequency(freq.id)}
                     >
-                      <h3 className="text-white font-medium">{freq.label}</h3>
+                      <div className={`${selectedFrequency === freq.id ? "absolute inset-0 rounded-lg bg-gradient-to-r from-furia-gold to-furia-purple" : ""}`}></div>
+                      <div className={`${selectedFrequency === freq.id ? "absolute inset-[2px] rounded-[6px] bg-furia-dark z-0" : ""}`}></div>
+                      <h3 className={`text-white font-medium relative ${selectedFrequency === freq.id ? "z-10" : ""}`}>{freq.label}</h3>
                     </div>
                   ))}
                 </div>
@@ -343,12 +351,14 @@ export default function OnboardingPage() {
                       className={`
                         p-4 rounded-lg cursor-pointer transition-all
                         ${selectedPlatform === platform.id
-                          ? "bg-furia-purple border-2 border-furia-gold"
+                          ? "bg-furia-dark border-2 border-transparent relative"
                           : "bg-gray-800 hover:bg-gray-700"}
                       `}
                       onClick={() => setSelectedPlatform(platform.id)}
                     >
-                      <h3 className="text-white font-medium">{platform.icon} {platform.label}</h3>
+                      <div className={`${selectedPlatform === platform.id ? "absolute inset-0 rounded-lg bg-gradient-to-r from-furia-gold to-furia-purple" : ""}`}></div>
+                      <div className={`${selectedPlatform === platform.id ? "absolute inset-[2px] rounded-[6px] bg-furia-dark z-0" : ""}`}></div>
+                      <h3 className={`text-white font-medium relative ${selectedPlatform === platform.id ? "z-10" : ""}`}>{platform.icon} {platform.label}</h3>
                     </div>
                   ))}
                 </div>
@@ -376,12 +386,14 @@ export default function OnboardingPage() {
                       className={`
                         p-4 rounded-lg cursor-pointer transition-all
                         ${selectedDevice === device.id
-                          ? "bg-furia-purple border-2 border-furia-gold"
+                          ? "bg-furia-dark border-2 border-transparent relative"
                           : "bg-gray-800 hover:bg-gray-700"}
                       `}
                       onClick={() => setSelectedDevice(device.id)}
                     >
-                      <h3 className="text-white font-medium">{device.icon} {device.label}</h3>
+                      <div className={`${selectedDevice === device.id ? "absolute inset-0 rounded-lg bg-gradient-to-r from-furia-gold to-furia-purple" : ""}`}></div>
+                      <div className={`${selectedDevice === device.id ? "absolute inset-[2px] rounded-[6px] bg-furia-dark z-0" : ""}`}></div>
+                      <h3 className={`text-white font-medium relative ${selectedDevice === device.id ? "z-10" : ""}`}>{device.icon} {device.label}</h3>
                     </div>
                   ))}
                 </div>
@@ -409,12 +421,14 @@ export default function OnboardingPage() {
                       className={`
                         p-4 rounded-lg cursor-pointer transition-all
                         ${selectedAgeRange === range.id
-                          ? "bg-furia-purple border-2 border-furia-gold"
+                          ? "bg-furia-dark border-2 border-transparent relative"
                           : "bg-gray-800 hover:bg-gray-700"}
                       `}
                       onClick={() => setSelectedAgeRange(range.id)}
                     >
-                      <h3 className="text-white font-medium">{range.label}</h3>
+                      <div className={`${selectedAgeRange === range.id ? "absolute inset-0 rounded-lg bg-gradient-to-r from-furia-gold to-furia-purple" : ""}`}></div>
+                      <div className={`${selectedAgeRange === range.id ? "absolute inset-[2px] rounded-[6px] bg-furia-dark z-0" : ""}`}></div>
+                      <h3 className={`text-white font-medium relative ${selectedAgeRange === range.id ? "z-10" : ""}`}>{range.label}</h3>
                     </div>
                   ))}
                 </div>
@@ -452,7 +466,7 @@ export default function OnboardingPage() {
                 className={`
                   px-6 py-2 rounded-lg font-medium transition-colors
                   ${canProceed()
-                    ? "bg-furia-purple text-white hover:bg-furia-purple/90"
+                    ? "bg-furia-gold text-black hover:bg-furia-gold/90"
                     : "bg-gray-700 text-gray-400 cursor-not-allowed"}
                 `}
               >

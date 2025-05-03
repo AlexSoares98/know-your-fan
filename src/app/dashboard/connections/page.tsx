@@ -141,7 +141,7 @@ export default function ConnectionsPage() {
                   className={`px-3 py-1.5 ${
                     isConnecting === connection.platform 
                       ? "bg-gray-700 text-gray-400 cursor-not-allowed" 
-                      : "bg-furia-purple hover:bg-furia-purple/90 text-white"
+                      : "bg-furia-gold hover:bg-furia-gold/90 text-black"
                   } rounded-lg text-sm flex items-center`}
                 >
                   {isConnecting === connection.platform ? (
@@ -163,7 +163,7 @@ export default function ConnectionsPage() {
         
         <div className="mt-6 pt-4 border-t border-gray-700">
           <div className="flex items-center text-gray-400">
-            <PlusCircle className="w-5 h-5 mr-2 text-furia-purple" />
+            <PlusCircle className="w-5 h-5 mr-2 text-furia-gold" />
             <span>
               Cada rede social conectada adiciona pontos ao seu perfil e ajuda a desbloquear 
               níveis de fã mais altos.
@@ -173,4 +173,4 @@ export default function ConnectionsPage() {
       </motion.div>
     </div>
   );
-} 
+}

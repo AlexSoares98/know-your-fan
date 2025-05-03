@@ -304,7 +304,7 @@ export default function PostsPage() {
                 <button
                   onClick={handleSubmitPost}
                   disabled={newPost.trim() === ""}
-                  className="bg-furia-purple hover:bg-furia-purple/80 text-white px-4 py-2 rounded-full flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-furia-gold hover:bg-furia-gold/80 text-black px-4 py-2 rounded-full flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send size={16} />
                   <span className="hidden sm:inline">Publicar</span>

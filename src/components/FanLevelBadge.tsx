@@ -14,6 +14,7 @@ interface FanLevelBadgeProps {
   purchases?: number;
   connectedSocials?: number;
   showProgress?: boolean;
+  showAnimation?: boolean;
   className?: string;
 }
 
@@ -24,11 +25,14 @@ export function FanLevelBadge({
   purchases = 0,
   connectedSocials = 0,
   showProgress = true,
+  showAnimation = false,
   className = "",
 }: FanLevelBadgeProps) {
   const [fanLevel, setFanLevel] = useState<FanLevel>("casual");
   const [progress, setProgress] = useState(0);
+  const [animatedProgress, setAnimatedProgress] = useState(0);
   const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [canBoost, setCanBoost] = useState(false);
 
   useEffect(() => {
     // Determinar o nível do fã baseado nas regras
@@ -68,7 +72,43 @@ export function FanLevelBadge({
     
     setFanLevel(level);
     setProgress(currentProgress);
-  }, [postsWithHashtags, postsWithLikes, quizParticipation, purchases, connectedSocials]);
+    
+    // Se não estiver animando, atualiza o progresso animado imediatamente
+    if (!showAnimation) {
+      setAnimatedProgress(currentProgress);
+    }
+  }, [postsWithHashtags, postsWithLikes, quizParticipation, purchases, connectedSocials, showAnimation]);
+
+  // Efeito para animar o progresso quando showAnimation for true
+  useEffect(() => {
+    if (showAnimation) {
+      // Começa com o valor atual menos 10 pontos (simula o aumento)
+      setAnimatedProgress(Math.max(0, progress - 10));
+      setCanBoost(true);
+      
+      // Anima para o valor atual completo
+      const timer = setTimeout(() => {
+        setAnimatedProgress(progress);
+      }, 500);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [showAnimation, progress]);
+
+  // Função para aumentar o preenchimento em 10% quando a seta é clicada
+  const handleBoostProgress = () => {
+    if (canBoost && progress < 100) {
+      const newProgress = Math.min(100, progress + 10);
+      setProgress(newProgress);
+      setAnimatedProgress(newProgress);
+      setCanBoost(false); // Desabilita o boost após ser usado
+      
+      // Atualiza os dados no localStorage
+      const preferences = JSON.parse(localStorage.getItem("furia-fan-preferences") || "{}");
+      preferences.postsWithHashtags = (preferences.postsWithHashtags || 0) + 1;
+      localStorage.setItem("furia-fan-preferences", JSON.stringify(preferences));
+    }
+  };
 
   // Dados dos níveis
   const levelData = {
@@ -142,15 +182,41 @@ export function FanLevelBadge({
         
         {showProgress && fanLevel !== "furioso" && (
           <div className="w-full mt-2">
-            <div className="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
-              <div 
-                className={`h-full ${fanLevel === "leal" ? "bg-furia-purple" : "bg-gray-500"}`}
-                style={{ width: `${progress}%` }}
-              ></div>
+            <div className="flex items-center justify-center">
+              <div className="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
+                <motion.div 
+                  className={`h-full ${fanLevel === "leal" ? "bg-furia-purple" : "bg-gray-500"}`}
+                  style={{ width: `${animatedProgress}%` }}
+                  animate={showAnimation ? 
+                    { width: `${progress}%`, transition: { duration: 1.5, ease: "easeOut" } } : 
+                    { width: `${animatedProgress}%` }
+                  }
+                ></motion.div>
+              </div>
+              
+              {canBoost && (
+                <motion.button
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                  initial={{ y: 0, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={handleBoostProgress}
+                  className="text-furia-gold hover:text-furia-purple transition-colors ml-2"
+                  title="Clique para aumentar seu progresso"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 19V5M5 12l7-7 7 7"/>
+                  </svg>
+                </motion.button>
+              )}
             </div>
-            <p className="text-xs text-gray-400 mt-1">
-              Próximo nível: {progress.toFixed(0)}%
-            </p>
+            
+            <div className="mt-1">
+              <p className="text-xs text-gray-400">
+                {progress.toFixed(0)}/100 pontos
+              </p>
+            </div>
           </div>
         )}
       </div>
