@@ -8,7 +8,7 @@ import { Avatar } from "@/components/ui/avatar";
 
 interface NavbarProps {
   username: string;
-  avatar?: string;
+  avatar?: string | null;
   unreadNotifications?: number;
 }
 

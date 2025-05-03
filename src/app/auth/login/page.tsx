@@ -1,14 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import SocialLoginButtons from "@/components/SocialLoginButtons";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function LoginPage() {
   // O estado isLoading é mantido para controlar a exibição do spinner de carregamento na interface
-  const [isLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const { status } = useSession();
+  
+  // Verificar se o usuário já está autenticado e redirecionar para o dashboard
+  useEffect(() => {
+    const hasSession = localStorage.getItem("furia-fan-session");
+    
+    if (status === "authenticated" || hasSession) {
+      router.push("/dashboard/overview");
+    }
+  }, [status, router]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-furia-dark p-4">
