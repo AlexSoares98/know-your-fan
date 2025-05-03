@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import SocialLoginButtons from "@/components/SocialLoginButtons";
 
 export default function LoginPage() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-furia-dark p-4">

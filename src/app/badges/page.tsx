@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 
 type Badge = {
   id: string;

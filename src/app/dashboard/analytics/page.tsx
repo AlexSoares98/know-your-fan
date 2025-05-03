@@ -13,7 +13,8 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Legend
+  Legend,
+  TooltipProps
 } from "recharts";
 
 type SentimentData = {
@@ -27,14 +28,25 @@ type HeatmapData = {
   engajamento: number;
 };
 
+// Definindo a interface para o payload do tooltip para evitar o uso de 'any'
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: Array<{
+    name: string;
+    value: number;
+    dataKey: string;
+  }>;
+}
+
 export default function AnalyticsPage() {
-  const [sentimentData, setSentimentData] = useState<SentimentData[]>([
+  // Dados inicializados diretamente, sem precisar do setter já que não mudam
+  const [sentimentData] = useState<SentimentData[]>([
     { name: "Positivo", value: 65, color: "#4AE588" },
     { name: "Neutro", value: 25, color: "#FFD700" },
     { name: "Negativo", value: 10, color: "#FF4A4A" }
   ]);
 
-  const [heatmapData, setHeatmapData] = useState<HeatmapData[]>([
+  const [heatmapData] = useState<HeatmapData[]>([
     { hour: "00:00", engajamento: 10 },
     { hour: "03:00", engajamento: 5 },
     { hour: "06:00", engajamento: 8 },
@@ -47,10 +59,10 @@ export default function AnalyticsPage() {
 
   // Em uma aplicação real, buscaríamos esses dados de uma API
   useEffect(() => {
-
+    // Implementação futura de busca de dados
   }, []);
 
-  const CustomTooltip = ({ active, payload }: any) => {
+  const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-furia-gray p-3 rounded-lg border border-gray-700 shadow-lg">

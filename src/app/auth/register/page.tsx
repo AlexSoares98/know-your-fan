@@ -16,10 +16,12 @@ export default function RegisterPage() {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState<RegistrationStep>("userdata");
   const [progress, setProgress] = useState(25);
+
   const [userData, setUserData] = useState<UserFormData | null>(null);
   const [isDocumentValidated, setIsDocumentValidated] = useState(false);
   const [isSocialConnected, setIsSocialConnected] = useState(false);
   const [isProfileValidated, setIsProfileValidated] = useState(false);
+  
   const [loading, setLoading] = useState(false);
 
   const handleUserDataSubmit = (data: UserFormData) => {
@@ -48,15 +50,12 @@ export default function RegisterPage() {
     // Simula finalização do registro
     setLoading(true);
     setTimeout(() => {
-      // Em uma implementação real, enviaria todos os dados para a API
       localStorage.setItem("furia-fan-session", "true");
       localStorage.setItem("furia-fan-onboarding-complete", "true");
-      
-      // Define o cadastro como completo e marca para mostrar a animação de pontos
+
       localStorage.setItem("furia-profile-complete", "true");
       localStorage.setItem("furia-just-completed-profile", "true");
       
-      // Adiciona pontos aos hashstags para simular o aumento de nível
       const preferences = JSON.parse(localStorage.getItem("furia-fan-preferences") || "{}");
       preferences.postsWithHashtags = (preferences.postsWithHashtags || 0) + 3;
       localStorage.setItem("furia-fan-preferences", JSON.stringify(preferences));

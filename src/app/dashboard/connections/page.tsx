@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Check, X, Instagram, Twitter, PlusCircle, Link as LinkIcon } from "lucide-react";
 
