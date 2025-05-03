@@ -13,8 +13,7 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Legend,
-  TooltipProps
+  Legend
 } from "recharts";
 
 type SentimentData = {
@@ -39,13 +38,14 @@ interface CustomTooltipProps {
 }
 
 export default function AnalyticsPage() {
-  // Dados inicializados diretamente, sem precisar do setter já que não mudam
+  // Dados estáticos que não mudam, por isso não precisamos do setter
   const [sentimentData] = useState<SentimentData[]>([
     { name: "Positivo", value: 65, color: "#4AE588" },
     { name: "Neutro", value: 25, color: "#FFD700" },
     { name: "Negativo", value: 10, color: "#FF4A4A" }
   ]);
 
+  // Dados estáticos de heatmap que não mudam, por isso não precisamos do setter
   const [heatmapData] = useState<HeatmapData[]>([
     { hour: "00:00", engajamento: 10 },
     { hour: "03:00", engajamento: 5 },
@@ -160,7 +160,7 @@ export default function AnalyticsPage() {
                     borderColor: '#555',
                     color: 'white'
                   }}
-                  formatter={(value) => [`${value}%`, 'Engajamento']}
+                  formatter={(value: number) => [`${value}%`, 'Engajamento']}
                 />
                 <Legend wrapperStyle={{ color: '#BBB' }} />
                 <Bar 

@@ -17,10 +17,14 @@ export default function RegisterPage() {
   const [currentStep, setCurrentStep] = useState<RegistrationStep>("userdata");
   const [progress, setProgress] = useState(25);
 
-  const [userData, setUserData] = useState<UserFormData | null>(null);
-  const [isDocumentValidated, setIsDocumentValidated] = useState(false);
-  const [isSocialConnected, setIsSocialConnected] = useState(false);
-  const [isProfileValidated, setIsProfileValidated] = useState(false);
+  // userData armazena os dados informados pelo usuário no primeiro passo
+  const [_userData, setUserData] = useState<UserFormData | null>(null);
+  // isDocumentValidated controla se os documentos foram validados com sucesso
+  const [_isDocumentValidated, setIsDocumentValidated] = useState(false);
+  // isSocialConnected indica se o usuário conectou perfis de redes sociais
+  const [_isSocialConnected, setIsSocialConnected] = useState(false);
+  // isProfileValidated confirma a validação dos perfis de e-sports
+  const [_isProfileValidated, setIsProfileValidated] = useState(false);
   
   const [loading, setLoading] = useState(false);
 

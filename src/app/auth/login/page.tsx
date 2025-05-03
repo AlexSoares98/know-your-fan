@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import SocialLoginButtons from "@/components/SocialLoginButtons";
 
 export default function LoginPage() {
+  // O estado isLoading é mantido para controlar a exibição do spinner de carregamento na interface
   const [isLoading] = useState(false);
 
   return (
